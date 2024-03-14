@@ -1,0 +1,60 @@
+body {
+  padding: 2rem 6rem;
+  font-family: "Lato", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  /* text-align: center; */
+  background-color: #ffffff;
+}
+
+/* Headings */
+
+h2 {
+  color: #0770d9;
+}
+
+h3 {
+  color: #4b4b4b;
+}
+
+h4 {
+  color: #696969;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+/* Lists */
+
+ul {
+  display: inline-block;
+  text-align: left;
+}
+
+ol li {
+  padding: 0.5rem 0;
+}
+
+ul li {
+  padding: 0;
+}
+
+/* Images */
+
+/* Table */
+table {
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #e7f3ff;
+}
+
+th {
+}
+
+td,
+th {
+  border: 1px solid rgb(224, 224, 224);
+  padding: 8px;
+}

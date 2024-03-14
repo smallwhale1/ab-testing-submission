@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AB Testing</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>A/B Testing</h1>
+    <h2>Project Overview</h2>
+    <p>
+      This project leverages A/B Testing to provide statistical insight into how
+      small UI changes affect a user's experience accomplishing tasks with an
+      interface.
+    </p>
+    <h2>User Testing</h2>
+    <p>
+      During the A/B Test, users were asked to complete a task:
+      <i
+        >Schedule an appointment with Adam Ng at Morristown Medical Center on
+        April 23, 2024.</i
+      >
+      They did it with two interfaces, A (left) and B (right):
+    </p>
+    <div>
+      <img src="assets/ab-testing-a.png" width="500" />
+      <img src="assets/ab-testing-b.png" width="500" />
+    </div>
+    <p>
+      I made slight changes to version B with the goal of making the task easier
+      to accomplish through slight UI modifications differentiating button
+      colors and improving button contrast, adding a slight background tint to
+      each date label to delimit each appointment, and adding a small profile
+      icon to indicate the physician.
+    </p>
+    <h2>Analysis</h2>
+    <h3>Metrics</h3>
+    <p>
+      I analayzed three different metrics gathered from user testing:
+      <i>time_on_page</i> , <i>did_misclick</i> , and <i>num_clicks</i>. My
+      metric of choice, <i>num_clicks</i>, indicated the number of times the
+      user clicked on the page, which I found to be an interesting indication of
+      how efficient and confident the user was in their clicking behavior.
+    </p>
+    <h3>Hypotheses</h3>
+    <ol>
+      <li><i>Time on page (time_on_page)</i></li>
+      <ul>
+        <li>
+          H0: The time spent on the page was the same between versions A and B.
+        </li>
+        <li>H1: Users spent less time on version B.</li>
+      </ul>
+      <p>
+        <b>Reasoning:</b> The UI changes in version B delimit each block more
+        clearly, and increased contrast in button colors makes the text more
+        readable, making it easier to both locate the correct scheduling block
+        and read the text, and thus decreasing the time users have to search for
+        and decide on the correct one. Furthermore, the profile icon next to the
+        physician's name intends to help users locate the name of the physician
+        in the block.
+      </p>
+      <p>
+        <b>Prediction:</b> It is predicted to reject the null, since the clearer
+        separation of appointment blocks, icons indicating the physician's name,
+        and the higher contrast buttons will likely allow most users to complete
+        the task more quickly and spend less time on the site.
+      </p>
+
+      <li><i>Misclick rate (did_misclick)</i></li>
+      <ul>
+        <li>H0: The misclick rate was the same between versions A and B.</li>
+        <li>H1: Version B had a smaller misclick rate.</li>
+      </ul>
+      <p>
+        <b>Reasoning:</b> The UI changes in version B make the scheduling
+        buttons pop more and make it less likely that they will click on the see
+        appointment buttons.
+      </p>
+      <p>
+        <b>Prediction:</b> It is predicted to reject the null, since the
+        scheduling buttons are much easier to read and visually distinct from
+        the see appointment buttons in site B, making it significantly more
+        difficult to misclick.
+      </p>
+
+      <li><i>Number of clicks (num_clicks)</i></li>
+      <ul>
+        <li>
+          H0: The number of clicks were the same between versions A and B.
+        </li>
+        <li>H1: Users clicked fewer times in version B.</li>
+      </ul>
+      <p>
+        <b>Reasoning:</b> The UI changes in version B delimit each block more
+        clearly, making it easier to locate the correct scheduling block, and
+        thus decreasing the time users have to search for the correct one.
+      </p>
+      <p>
+        <b>Prediction:</b> It is predicted to reject the null, since the UI
+        changes make it likely that users will click more confidently due to the
+        clearer visual separation of appointment slots and visibility of
+        important buttons.
+      </p>
+    </ol>
+    <p></p>
+    <h3>Statistical Tests</h3>
+    <h4>Time Spent on Page</h4>
+    <p>
+      To analyze the time spent on the page, a one-tailed t-test was used
+      because the time it takes to complete the task is a continuous value, and
+      we are specifically interested in if the time spent in version B is less
+      than that of version A.
+    </p>
+
+    <p>Here are the results:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Avg(A)</td>
+          <td>36139.45833</td>
+        </tr>
+        <tr>
+          <td>Variance(A)</td>
+          <td>212313712.7</td>
+        </tr>
+        <tr>
+          <td>Avg(B)</td>
+          <td>8586.083333</td>
+        </tr>
+        <tr>
+          <td>Variance(B)</td>
+          <td>14865511.47</td>
+        </tr>
+        <tr>
+          <td>Degrees of Freedom</td>
+          <td>26.2050572</td>
+        </tr>
+        <tr>
+          <td>T-score</td>
+          <td>-8.955629491</td>
+        </tr>
+        <tr>
+          <td>P-value (A &gt; B)</td>
+          <td>0.0000000009332283761</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      With a -value of around 0.0000000001, the p-value is well below 0.05, so
+      we find a statistically significant difference in the time spent on the
+      page. <br />
+      The t-score of -8.96 indicates that users spent significantly less time on
+      site B, and degrees of freedom of 26 roughly align with the number of
+      participants. <br />
+      So, we find evidence to reject the null hypothesis and accept the
+      alternative.
+    </p>
+    <!-- Misclick rate -->
+    <h4>Misclick Rate</h4>
+    <p>
+      To analyze the misclick rate, the chi-squared test was chosen, since the
+      data collected placed users into two categories: true and false,
+      indicating whether they misclicked or not.
+    </p>
+    <p>Here are the results:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>df</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>χ2</td>
+          <td>9.920634921</td>
+        </tr>
+        <tr>
+          <td>p-value</td>
+          <td>0.001634359924</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      With a -value of around 0.0016, the p-value is significantly under 0.05,
+      so we find a statistically significant difference in if users did
+      misclick. <br />
+
+      The chi-dquared value of 9.92 indicates a significant difference between
+      sites A and B with respect to how many users misclicked. The chi-squared
+      value reflects our two categories and two sample groups.<br />
+
+      With this data, we find evidence to reject the null hypothesis and accept
+      the alternative.
+    </p>
+    <!-- Number of clicks -->
+    <h4>Number of Clicks</h4>
+    <p>
+      To analyze the time spent on the page, a one-tailed t-test was used
+      because number of clicks is a continuous value, and we are specifically
+      interested in if the number of clicks in version B is less than that of
+      version A.
+    </p>
+
+    <p>Here are the results:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Avg(A)</td>
+          <td>8.833333333</td>
+        </tr>
+        <tr>
+          <td>Variance(A)</td>
+          <td>62.4057971</td>
+        </tr>
+        <tr>
+          <td>Avg(B)</td>
+          <td>2.25</td>
+        </tr>
+        <tr>
+          <td>Variance(B)</td>
+          <td>0.543478260</td>
+        </tr>
+        <tr>
+          <td>Degrees of Freedom</td>
+          <td>23.40057343</td>
+        </tr>
+        <tr>
+          <td>T-score</td>
+          <td>-4.064958335</td>
+        </tr>
+        <tr>
+          <td>P-value (A &gt; B)</td>
+          <td>0.0002327671613</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5></h5>
+    <p>
+      With a -value of around 0.00023, the p-value is significantly below 0.05,
+      so we find a statistically significant difference in the number of clicks
+      users made. <br />
+      The t-score of -4.06 indicates that users spent significantly less time on
+      site B, and degrees of freedom of 26 roughly align with the number of
+      participants. <br />
+      So, we find evidence to reject the null hypothesis and accept the
+      alternative once again.
+    </p>
+    <h3>Summary Statistics</h3>
+    <p>
+      The mean time spent on version B (8586) is much lower than A (36139),
+      indicating that users spent more time on version A and B. While variance
+      for mean time spent is high, 14865511.47 in B vs. 212313712.7 in A, data
+      points are less varied in B, indicating more consistent results.<br />
+      The mean number of clicks on version B (2.25) is much lower than A (8.83),
+      indicating that users clicked significantly fewer times on version B.
+      Variance for A's number of clicks was 62.4, and 0.54 for B, with B's low
+      variance indicating that most values were near the lower mean, providing
+      further evidence of a confidently lower average number of clicks.
+    </p>
+    <h2>Conclusion</h2>
+    <p>
+      Through analyzing the p-values, supported by t-scores, chi-squared values,
+      means, variances, we observe statistically significant results that
+      provide evidence to accept all of our alternative hypotheses. It is
+      therefore likely that users were able to complete the task and navigate
+      the interface much more quickly and efficiently with version B.
+    </p>
+  </body>
+</html>
